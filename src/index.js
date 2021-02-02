@@ -50,6 +50,27 @@ const createTask = () => {
     let task = new TaskNode(title, description);
     task.next = tasks.head;
     tasks.head = task;
+    renderTasks();
 };
+
+const renderTasks = () => {
+    let list = document.querySelector(".tasklist");
+    if (list) {
+        list.innerHTML = "";
+    } else {
+        list = document.createElement("ul");
+    }
+    let node = tasks.head;
+    list.className = "taskList";
+    while (node != null) {
+        const item = document.createElement("li");
+        item.innerText = node.title;
+        list.appendChild(item);
+        node = node.next;
+    }
+    document.body.appendChild(list);
+};
+
+renderTasks();
 
 const addBtnListener = addBtn.addEventListener("click", createTask);

@@ -21,6 +21,9 @@
         - Render list function, specifically render inbox
 */
 
+import { renderList } from './renderList.js'
+import { loadPage } from './load.js'
+
 class TaskNode {
     constructor(title, description) {
         this.title = title;
@@ -35,14 +38,10 @@ class TaskList {
     }
 }
 
-let t1 = new TaskNode("Make a checklist", "detailed checklist");
-let t2 = new TaskNode("Complete checklist", "check off checklist");
-t1.next = t2;
+let t1 = new TaskNode("First task", "detailed description");
+// let t2 = new TaskNode("Complete checklist", "check off checklist");
+// t1.next = t2;
 let tasks = new TaskList(t1);
-
-const addBtn = document.createElement("button");
-addBtn.innerText = "Add task";
-document.body.appendChild(addBtn);
 
 const createTask = () => {
     let title = prompt("Task name");
@@ -50,27 +49,11 @@ const createTask = () => {
     let task = new TaskNode(title, description);
     task.next = tasks.head;
     tasks.head = task;
-    renderTasks();
+    renderList(tasks.head);
 };
 
-const renderTasks = () => {
-    let list = document.querySelector(".tasklist");
-    if (list) {
-        list.innerHTML = "";
-    } else {
-        list = document.createElement("ul");
-    }
-    let node = tasks.head;
-    list.className = "taskList";
-    while (node != null) {
-        const item = document.createElement("li");
-        item.innerText = node.title;
-        list.appendChild(item);
-        node = node.next;
-    }
-    document.body.appendChild(list);
-};
+loadPage();
+renderList(tasks.head);
 
-renderTasks();
-
-const addBtnListener = addBtn.addEventListener("click", createTask);
+const addBtn = document.querySelector(".newTaskBtn");
+addBtn.addEventListener("click", createTask);

@@ -39,3 +39,17 @@ let t1 = new TaskNode("Make a checklist", "detailed checklist");
 let t2 = new TaskNode("Complete checklist", "check off checklist");
 t1.next = t2;
 let tasks = new TaskList(t1);
+
+const addBtn = document.createElement("button");
+addBtn.innerText = "Add task";
+document.body.appendChild(addBtn);
+
+const createTask = () => {
+    let title = prompt("Task name");
+    let description = prompt("Task description");
+    let task = new TaskNode(title, description);
+    task.next = tasks.head;
+    tasks.head = task;
+};
+
+const addBtnListener = addBtn.addEventListener("click", createTask);

@@ -3,15 +3,22 @@ const renderList = (listHead) => {
     if (list) {
         list.innerHTML = "";
     } else {
-        list = document.createElement("ul");
+        list = document.createElement("div");
     }
-    let node = listHead;
     list.className = "taskList";
+    let node = listHead;
+    let id = 0;
     while (node != null) {
-        const item = document.createElement("li");
-        item.innerText = node.title;
+        const item = document.createElement("input");
+        item.type = "checkbox";
+        item.name = `task${id}`;
+        const itemLabel = document.createElement("label");
+        itemLabel.innerHTML = `${node.title}<br>`;
+        itemLabel.for = `task${id}`;
         list.appendChild(item);
+        list.appendChild(itemLabel);
         node = node.next;
+        id++;
     }
     document.body.appendChild(list);
 };

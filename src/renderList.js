@@ -1,4 +1,4 @@
-const renderList = (listHead) => {
+const renderList = (taskList) => {
     let list = document.querySelector(".tasklist");
     if (list) {
         list.innerHTML = "";
@@ -6,7 +6,10 @@ const renderList = (listHead) => {
         list = document.createElement("div");
     }
     list.className = "taskList";
-    let node = listHead;
+    const listTitle = document.createElement("h3");
+    listTitle.innerText = taskList.title;
+    list.appendChild(listTitle);
+    let node = taskList.head;
     let id = 0;
     while (node != null) {
         const item = document.createElement("input");

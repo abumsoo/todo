@@ -1,8 +1,12 @@
 const loadPage = () => {
-    const addBtn = document.createElement("button");
-    addBtn.className = "newTaskBtn";
-    addBtn.innerText = "Add task";
-    document.body.appendChild(addBtn);
+    const newTaskBtn = document.createElement("button");
+    newTaskBtn.className = "newTaskBtn";
+    newTaskBtn.innerText = "New task";
+    document.body.appendChild(newTaskBtn);
+    const newListBtn = document.createElement("button");
+    newListBtn.className = "newListBtn";
+    newListBtn.innerText = "New list";
+    document.body.appendChild(newListBtn);
 }
 
 export { loadPage }

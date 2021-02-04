@@ -33,27 +33,28 @@ class TaskNode {
 }
 
 class TaskList {
-    constructor(head = null) {
+    constructor(head = null, title) {
         this.head = head;
+        this.title = title;
     }
 }
 
 let t1 = new TaskNode("First task", "detailed description");
 // let t2 = new TaskNode("Complete checklist", "check off checklist");
 // t1.next = t2;
-let tasks = new TaskList(t1);
+let defaultList = new TaskList(t1, "Default");
 
 const createTask = () => {
     let title = prompt("Task name");
     let description = prompt("Task description");
     let task = new TaskNode(title, description);
     task.next = tasks.head;
-    tasks.head = task;
-    renderList(tasks.head);
+    defaultList.head = task;
+    renderList(defaultList);
 };
 
 loadPage();
-renderList(tasks.head);
+renderList(defaultList);
 
 const addBtn = document.querySelector(".newTaskBtn");
 addBtn.addEventListener("click", createTask);

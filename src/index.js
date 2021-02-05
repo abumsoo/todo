@@ -53,8 +53,17 @@ const createTask = () => {
     renderList(defaultList);
 };
 
+const createList = () => {
+    let title = prompt("List name");
+    let list = new TaskList(title = title);
+    renderList(list);
+}
+
 loadPage();
 renderList(defaultList);
+
+const newListBtn = document.querySelector(".newListBtn");
+newListBtn.addEventListener("click", createList);
 
 const addBtn = document.querySelector(".newTaskBtn");
 addBtn.addEventListener("click", createTask);

@@ -23,7 +23,7 @@ const renderList = (taskList) => {
         node = node.next;
         id++;
     }
-    document.body.appendChild(list);
+    document.querySelector(".listArea").appendChild(list);
 };
 
 export { renderList }

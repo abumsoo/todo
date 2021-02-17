@@ -24,6 +24,8 @@
 import { renderList } from './renderList.js'
 import { loadPage } from './load.js'
 
+const storage = window.localStorage;
+
 class TaskNode {
     constructor(title, description) {
         this.title = title;
@@ -39,19 +41,19 @@ class TaskList {
     }
 }
 
-let t1 = new TaskNode("First task", "detailed description");
-// let t2 = new TaskNode("Complete checklist", "check off checklist");
-// t1.next = t2;
-let defaultList = new TaskList(t1, "Default");
-
 const createTask = () => {
     let title = prompt("Task name");
     let description = prompt("Task description");
     let task = new TaskNode(title, description);
     task.next = tasks.head;
     defaultList.head = task;
-    renderList(defaultList);
+    renderTask(task);
 };
+
+const renderTask = (task) => {
+    const task = document.createElement("div");
+    const 
+}
 
 const createList = () => {
     let title = prompt("List name");
@@ -60,7 +62,6 @@ const createList = () => {
 }
 
 loadPage();
-renderList(defaultList);
 
 const newListBtn = document.querySelector(".newListBtn");
 newListBtn.addEventListener("click", createList);

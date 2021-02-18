@@ -21,10 +21,7 @@
         - Render list function, specifically render inbox
 */
 
-import { renderList } from './renderList.js'
-import { loadPage } from './load.js'
-
-const storage = window.localStorage;
+let head = null;
 
 class TaskNode {
     constructor(title, description) {
@@ -34,37 +31,10 @@ class TaskNode {
     }
 }
 
-class TaskList {
-    constructor(head = null, title) {
-        this.head = head;
-        this.title = title;
+const createTask = (title, description) => {
+    const newTask = new TaskNode(title, description);
+    if (head != null) {
+        newTask.next = head;
     }
+    head = newTask;
 }
-
-const createTask = () => {
-    let title = prompt("Task name");
-    let description = prompt("Task description");
-    let task = new TaskNode(title, description);
-    task.next = tasks.head;
-    defaultList.head = task;
-    renderTask(task);
-};
-
-const renderTask = (task) => {
-    const task = document.createElement("div");
-    const 
-}
-
-const createList = () => {
-    let title = prompt("List name");
-    let list = new TaskList(title = title);
-    renderList(list);
-}
-
-loadPage();
-
-const newListBtn = document.querySelector(".newListBtn");
-newListBtn.addEventListener("click", createList);
-
-const addBtn = document.querySelector(".newTaskBtn");
-addBtn.addEventListener("click", createTask);

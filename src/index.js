@@ -21,6 +21,10 @@
         - Render list function, specifically render inbox
 */
 
+import {loadPage} from "./load.js"
+
+loadPage();
+
 let head = null;
 
 class TaskNode {
@@ -37,4 +41,15 @@ const createTask = (title, description) => {
         newTask.next = head;
     }
     head = newTask;
+    renderTask(newTask);
 }
+
+const renderTask = (task) => {
+    const area = document.querySelector(".listArea");
+    const taskElement = document.createElement("div");
+    taskElement.className = "task";
+    taskElement.textContent = task.title;
+    area.appendChild(taskElement);
+}
+
+createTask("First task in redesign");

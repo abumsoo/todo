@@ -1,29 +1,31 @@
-const renderList = (taskList) => {
-    let list = document.querySelector(".tasklist");
-    if (list) {
-        list.innerHTML = "";
-    } else {
-        list = document.createElement("div");
-    }
-    list.className = "taskList";
-    const listTitle = document.createElement("h3");
-    listTitle.innerText = taskList.title;
-    list.appendChild(listTitle);
-    let node = taskList.head;
+const renderList = (list) => {
+    const listArea = document.querySelector(".listArea");
+    listArea.innerHTML = "";
+
+    const listElement = document.createElement("div");
+    listElement.className = list.key;
+    listElement.innerHTML = `<h2>${list.title}</h2>`;
+    listArea.appendChild(listElement);
+
+    let node = list.head;
     let id = 0;
     while (node != null) {
+        const taskElement = document.createElement("div");
+        taskElement.className = "task";
+        listElement.appendChild(taskElement);
+        
         const item = document.createElement("input");
         item.type = "checkbox";
-        item.name = `task${id}`;
+        taskElement.appendChild(item);
+        item.name = `task-${id}`;
         const itemLabel = document.createElement("label");
         itemLabel.innerHTML = `${node.title}<br>`;
-        itemLabel.for = `task${id}`;
-        list.appendChild(item);
-        list.appendChild(itemLabel);
-        node = node.next;
+        itemLabel.for = `task-${id}`;
+        taskElement.appendChild(itemLabel);
+
         id++;
+        node = node.next;
     }
-    document.querySelector(".listArea").appendChild(list);
-};
+}
 
 export { renderList }

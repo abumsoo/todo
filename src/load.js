@@ -1,4 +1,7 @@
 const loadPage = () => {
+    /*
+     * TODO: left sidebar to select lists
+     */
     const newTaskBtn = document.createElement("button");
     newTaskBtn.className = "newTaskBtn";
     newTaskBtn.innerText = "New task";

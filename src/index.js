@@ -22,11 +22,9 @@
 */
 
 import {loadPage} from "./load.js"
+import {renderList} from "./renderList.js"
 
 loadPage();
-
-let inbox = new TaskList("inbox", "Inbox", null);
-let lists = {"inbox": inbox}
 
 class TaskNode {
     constructor(title, description) {
@@ -34,23 +32,6 @@ class TaskNode {
         this.description = description;
         this.next = null;
     }
-}
-
-const createTask = (title, description, listKey="inbox") => {
-    // new TaskNode
-    const newTask = new TaskNode(title, description);
-    //  if list exists, add new task to the list
-    if (listKey in lists) {
-        if (lists[listKey] != null) {
-            newTask.next = lists[listKey];
-        }
-        lists[listKey] = newTask;
-    //  if not, create a new list, add new task to list, and add list to lists
-    } else {
-        const listTitle = listKey.charAt(0).toUpperCase() + listKey.slice(1);
-        lists[listKey] = new TaskList(listKey, listTitle, newTask);
-    }
-    renderList(lists[list]);
 }
 
 class TaskList {
@@ -61,19 +42,31 @@ class TaskList {
     }
 }
 
-const renderList = (list) => {
-    let listElement = document.querySelector(list.key);
-    if (!listElement) {
-        listElement = document.createElement("div");
-        listElement.className = list.key
-        document.querySelector(".listArea").appendChild(listElement);
+const createTask = (title, description, listKey="inbox") => {
+    // new TaskNode
+    const newTask = new TaskNode(title, description);
+    //  if list exists, add new task to the list
+    if (listKey in lists) {
+        if (lists[listKey].head != null) {
+            newTask.next = lists[listKey].head;
+        }
+        lists[listKey].head = newTask;
+    //  if not, create a new list, add new task to list, and add list to lists
+    } else {
+        const listTitle = listKey.charAt(0).toUpperCase() + listKey.slice(1);
+        lists[listKey] = new TaskList(listKey, listTitle, newTask);
     }
-    const taskElement = document.createElement("div");
-    taskElement.className = "task";
-    taskElement.textContent = task.title;
-    listElement.appendChild(taskElement);
+    renderList(lists[listKey]);
 }
 
-createTask("First task in redesign");
-createTask("Second task in redesign");
-createTask("Third task in redesign");
+const getTaskInfo = () => {
+    let title = prompt("Task: ");
+    let description = prompt("Description: ");
+    createTask(title, description);
+}
+
+const newTaskBtn = document.querySelector(".newTaskBtn");
+newTaskBtn.addEventListener("click", getTaskInfo);
+
+let inbox = new TaskList("inbox", "Inbox", null);
+let lists = {"inbox": inbox}

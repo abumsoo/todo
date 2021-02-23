@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.listsContainer {
+    width: 25%;
+    height: 100vh;
+    border-right: 2px solid blue;
+}
+
+.tasksContainer {
+    width: 75%;
+}

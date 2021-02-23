@@ -23,8 +23,8 @@
 
 import {loadPage} from "./load.js"
 import {renderList} from "./renderList.js"
+import css from "./style.css"
 
-loadPage();
 
 class TaskNode {
     constructor(title, description) {
@@ -65,8 +65,11 @@ const getTaskInfo = () => {
     createTask(title, description);
 }
 
-const newTaskBtn = document.querySelector(".newTaskBtn");
-newTaskBtn.addEventListener("click", getTaskInfo);
-
 let inbox = new TaskList("inbox", "Inbox", null);
 let lists = {"inbox": inbox}
+
+loadPage();
+renderList(lists["inbox"]);
+
+const newTaskBtn = document.querySelector(".newTaskBtn");
+newTaskBtn.addEventListener("click", getTaskInfo);

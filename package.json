@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/abumsoo/todo#readme",
   "devDependencies": {
+    "css-loader": "^5.0.2",
+    "style-loader": "^2.0.0",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0"
   }

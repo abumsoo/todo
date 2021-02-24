@@ -28,4 +28,13 @@ const renderList = (list) => {
     }
 }
 
-export { renderList }
+const renderListBar = (listsList) => {
+    const listBar = document.querySelector(".listBar");
+    for (const list in listsList) {
+        const listItem = document.createElement("li");
+        listItem.innerText = listsList[list].title;
+        listBar.appendChild(listItem);
+    }
+}
+
+export { renderList, renderListBar }

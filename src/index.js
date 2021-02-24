@@ -22,7 +22,7 @@
 */
 
 import {loadPage} from "./load.js"
-import {renderList} from "./renderList.js"
+import {renderList, renderListBar} from "./renderList.js"
 import css from "./style.css"
 
 
@@ -69,6 +69,7 @@ let inbox = new TaskList("inbox", "Inbox", null);
 let lists = {"inbox": inbox}
 
 loadPage();
+renderListBar(lists);
 renderList(lists["inbox"]);
 
 const newTaskBtn = document.querySelector(".newTaskBtn");

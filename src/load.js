@@ -1,28 +1,35 @@
 const loadPage = () => {
-    /*
-     */
-    // left sidebar to select lists
-    const container = document.createElement("div");
-    container.className = "container";
+    // main body
+    const container = createElement("div", "container");
     document.body.appendChild(container);
-    const listsContainer = document.createElement("div");
-    listsContainer.className = "listsContainer";
-    container.appendChild(listsContainer);
-    const tasksContainer = document.createElement("div");
-    tasksContainer.className = "tasksContainer";
-    container.appendChild(tasksContainer);
 
-    const newTaskBtn = document.createElement("button");
-    newTaskBtn.className = "newTaskBtn";
-    newTaskBtn.innerText = "New task";
-    tasksContainer.appendChild(newTaskBtn);
-    const newListBtn = document.createElement("button");
-    newListBtn.className = "newListBtn";
+    // left side
+    const listsContainer = createElement("div", "listsContainer");
+    container.appendChild(listsContainer);
+
+    const newListBtn = createElement("button", "newListBtn");
     newListBtn.innerText = "New list";
     listsContainer.appendChild(newListBtn);
-    const listArea = document.createElement("div");
-    listArea.className = "listArea";
+
+    const listBar = createElement("ul", "listBar")
+    listsContainer.appendChild(listBar);
+
+    // right side
+    const tasksContainer = createElement("div", "tasksContainer");
+    container.appendChild(tasksContainer);
+
+    const newTaskBtn = createElement("button", "newTaskBtn");
+    newTaskBtn.innerText = "New task";
+    tasksContainer.appendChild(newTaskBtn);
+
+    const listArea = createElement("div", "listArea");
     tasksContainer.appendChild(listArea);
+}
+
+const createElement = (tag, className) => {
+    const element = document.createElement(tag);
+    element.className = className;
+    return element;
 }
 
 export { loadPage }

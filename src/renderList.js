@@ -30,6 +30,7 @@ const renderList = (list) => {
 
 const renderListBar = (listsList) => {
     const listBar = document.querySelector(".listBar");
+    listBar.innerHTML = "";
     for (const list in listsList) {
         const listItem = document.createElement("li");
         listItem.innerText = listsList[list].title;

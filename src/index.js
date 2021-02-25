@@ -65,6 +65,13 @@ const getTaskInfo = () => {
     createTask(title, description);
 }
 
+const getListInfo = () => {
+    let title = prompt("List name: ");
+    const key = title.toLowerCase();
+    lists[key] = new TaskList(key, title, null);
+    renderListBar(lists);
+}
+
 let inbox = new TaskList("inbox", "Inbox", null);
 let lists = {"inbox": inbox}
 
@@ -74,3 +81,7 @@ renderList(lists["inbox"]);
 
 const newTaskBtn = document.querySelector(".newTaskBtn");
 newTaskBtn.addEventListener("click", getTaskInfo);
+
+const newListBtn = document.querySelector(".newListBtn");
+newListBtn.addEventListener("click", getListInfo);
+

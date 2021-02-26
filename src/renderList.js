@@ -35,6 +35,7 @@ const renderListBar = (listsList) => {
         const listItem = document.createElement("li");
         listItem.innerText = listsList[list].title;
         listBar.appendChild(listItem);
+        listItem.addEventListener('click', () => renderList(listsList[list]));
     }
 }
 

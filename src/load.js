@@ -24,6 +24,7 @@ const loadPage = () => {
 
     const listArea = createElement("div", "listArea");
     tasksContainer.appendChild(listArea);
+
 }
 
 const createElement = (tag, className) => {

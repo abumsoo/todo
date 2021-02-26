@@ -30,6 +30,7 @@ class TaskNode {
     constructor(title, description) {
         this.title = title;
         this.description = description;
+        this.checked = false;
         this.next = null;
     }
 }

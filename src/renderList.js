@@ -16,8 +16,14 @@ const renderList = (list) => {
         
         const item = document.createElement("input");
         item.type = "checkbox";
-        taskElement.appendChild(item);
         item.name = `task-${id}`;
+        if (node.checked == true) {
+            item.checked = true;
+        }
+        taskElement.appendChild(item);
+        item.addEventListener('change', () => {
+            node.checked = !node.checked;
+        });
         const itemLabel = document.createElement("label");
         itemLabel.innerHTML = `${node.title}<br>`;
         itemLabel.for = `task-${id}`;

@@ -63,7 +63,8 @@ const createTask = (title, description, listKey="inbox") => {
 const getTaskInfo = () => {
     let title = prompt("Task: ");
     let description = prompt("Description: ");
-    createTask(title, description);
+    let list = document.querySelector(".listArea").firstChild;
+    createTask(title, description, list.className);
 }
 
 const getListInfo = () => {

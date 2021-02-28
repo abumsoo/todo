@@ -17,11 +17,11 @@ const renderList = (list) => {
         const item = document.createElement("input");
         item.type = "checkbox";
         item.name = `task-${id}`;
+        taskElement.appendChild(item);
         if (node.checked == true) {
             item.checked = true;
         }
-        taskElement.appendChild(item);
-        item.addEventListener('change', () => {
+        item.addEventListener('change', (node) => {
             node.checked = !node.checked;
         });
         const itemLabel = document.createElement("label");

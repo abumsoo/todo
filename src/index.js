@@ -21,6 +21,7 @@
         - Render list function, specifically render inbox
 */
 
+
 import {loadPage} from "./load.js"
 import {renderList, renderListBar} from "./renderList.js"
 import css from "./style.css"
@@ -40,6 +41,7 @@ class TaskList {
         this.key = key;
         this.title = title;
         this.head = head;
+      this.tasks = [];
     }
 }
 
@@ -57,6 +59,8 @@ const createTask = (title, description, listKey="inbox") => {
         const listTitle = listKey.charAt(0).toUpperCase() + listKey.slice(1);
         lists[listKey] = new TaskList(listKey, listTitle, newTask);
     }
+  lists[listKey]["tasks"].push(newTask);
+  localStorage.setItem('lists', JSON.stringify(lists));
     renderList(lists[listKey]);
 }
 
@@ -67,15 +71,48 @@ const getTaskInfo = () => {
     createTask(title, description, list.className);
 }
 
-const getListInfo = () => {
+const createList = () => {
     let title = prompt("List name: ");
     const key = title.toLowerCase();
     lists[key] = new TaskList(key, title, null);
+  localStorage.setItem('lists', JSON.stringify(lists));
     renderListBar(lists);
 }
 
-let inbox = new TaskList("inbox", "Inbox", null);
-let lists = {"inbox": inbox}
+/*
+{
+  "inbox": {
+    "title" : "Inbox",
+    "tasks" : [
+      {
+        "title": "tehuh",
+        "description": "helucrahoruh",
+        "checked": true,
+      }
+    ]
+}
+*/
+
+let lists = JSON.parse(localStorage.getItem('lists'));
+for (let list in lists) {
+  let listObj = new TaskList(list, lists[list].title);
+  if (lists[list]["tasks"]) {
+    lists[list]["tasks"].forEach(task => {
+      let taskNode = new TaskNode(task.title, task.description);
+      taskNode.checked = task.checked;
+      taskNode.next = listObj.head;
+      listObj.head = taskNode;
+    });
+  }
+  lists[list] = listObj;
+}
+
+
+if (!lists) {
+  let inbox = new TaskList("inbox", "Inbox");
+  lists = {"inbox": inbox};
+  localStorage.setItem('lists', JSON.stringify(lists));
+}
 
 loadPage();
 renderListBar(lists);
@@ -85,5 +122,5 @@ const newTaskBtn = document.querySelector(".newTaskBtn");
 newTaskBtn.addEventListener("click", getTaskInfo);
 
 const newListBtn = document.querySelector(".newListBtn");
-newListBtn.addEventListener("click", getListInfo);
+newListBtn.addEventListener("click", createList);
 
